@@ -1,0 +1,81 @@
+---
+title: "UI Code"
+author: "bhill-10"
+date: "August 22, 2015"
+output: html_document
+---
+
+Code for the UI file for the Diamond Pricing Modle shiny app:
+```{r}
+library(ggplot2)
+library(shiny)
+library(shinyapps)
+library(caret)
+
+
+vars <- diamonds[,1:4]
+vars$price <- diamonds$price
+temp <<- vars[1,1:4]
+price_estimate <- train(price ~., data = vars, method = "glm")
+
+get_diamond_value <<- function(carat, cut, Color, clarity, temp) {
+        #x = variables carat, cut, color, clarity inputs from widgets
+        #model_fit is train object
+        #temp is data frame for new data
+        temp[1,2:4] <- c(cut, Color, clarity)
+        temp$carat <- as.numeric(carat)
+        as.character(format(predict(price_estimate,  temp), nsmall = 2, big.mark = ","))
+}
+
+shinyUI(pageWithSidebar(
+        headerPanel(h3("Diamond Pricing Model")),
+        sidebarPanel(
+                h4('Select Your Diamond Characteristics'),
+                h6('In this set, Colors range from D to G, with D being the highest grade.'),
+                selectInput("Color", h4("Diamond Color:"),
+                        c("D" = "D", "E" = "E", "F" = "F", "G" = "G", "H" = "H", 
+                          "I" = "I", "J" = "J"), selected = "G"),
+                h6('Ideal cut is the highest quality and Fair cut is the lowest quality.'),
+                selectInput("cut", h4("Cut Quality:"), c("Ideal" = "Ideal", 
+                        "Premium" = "Premium", "Very Good" = "Very Good", "Good" = "Good",
+                        "Fair" = "Fair"),selected = "Very Good"),
+                h6('Price typically increases in steps as you cross whole carats, \n e.g. 0.95 to 1.05 has a step change in price'),
+                sliderInput("carats",h4("Carat Weight:"),
+                              min = 0.25,
+                              max = 5.25,
+                              value = 1.00, 
+                              step = 0.05),
+                radioButtons("clarity", label = h4("Select Clarity:"),
+                        choices = list("IF" = "IF", "VVS1" = "VVS1", "VVS2" = "VVS2", 
+                                "VS1" = "VS1", "VS2" = "VS2", "SI1" = "SI1", "SI2" = "SI2", "I1" = "I1"),
+                                selected = "VS2"),
+                actionButton("goButton", "Calculate Value")
+        ),
+
+        
+        mainPanel(
+                h2("Your Diamond"),
+                
+                h4(textOutput("colortext")),
+                h4(textOutput("cuttext")),
+                h4(textOutput("caratstext")),
+                h4(textOutput("claritytext", color = "green")),
+                
+        
+                h3(textOutput("diamond_value_text")),
+                
+                h1("\n\n\n"),
+                h3("Documentation: The 4 C's of Loose Diamonds"),
+                h4("\n"),
+                h4("From http://www.diamondse.info/"),
+                h4("\n"),
+                h5("Color: Most commercially available diamonds are classified by color, or more appropriately, the lack of color"),
+                h5("Cut: The beauty of a diamond resides not only in a favorable body color, but more importantly in its optical properties"),
+                h5("Carat Weight: The weight of diamonds, and all other gemstones, is measured in carats."),
+                h5("Clarity: The clarity of a diamond is determined by the number, location and type of inclusions it contains.")
+                
+                
+        )
+))
+)
+```

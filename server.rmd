@@ -1,0 +1,46 @@
+---
+title: "Server Code"
+author: "bhill-10"
+date: "August 22, 2015"
+output: html_document
+---
+
+Code for the Server file for the Diamond Pricing Model shiny app:
+
+```{r}
+library(shiny)
+library(caret)
+
+diamond_value <- 0
+
+shinyServer(
+        function(input, output) {
+                output$colortext <- renderText({ 
+                        paste("Color Selected: ", input$Color)})
+                
+                output$cuttext <- renderText({
+                        paste("Cut Quality: ", input$cut)})
+                
+                output$caratstext <- renderText({
+                        paste("Carat Weight: ", input$carats)})
+                
+                output$claritytext <- renderText({
+                        paste("Clarity Selected: ", input$clarity)})
+         
+                
+                diamond_value <- reactive({
+                        get_diamond_value(input$carats, input$cut, input$Color, input$clarity, temp)
+                        })
+                
+                
+                output$diamond_value_text <- renderText({
+                        if (input$goButton == 0) {
+                                "Press the Button on the lower left to calculate the value of your diamond."
+                        } else {
+                                paste("The value of your diamond is $", diamond_value())
+                        }
+                })
+        }
+)
+```
+

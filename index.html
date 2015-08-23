@@ -113,18 +113,18 @@ vars$price &lt;- diamonds$price
 price_estimate &lt;- train(price ~., data = vars, method = &quot;glm&quot;)
 </code></pre>
 
-<p>Generalized Linear Model </p>
+<pre><code>Generalized Linear Model:
+53940 samples
+4 predictor
 
-<p>53940 samples
-    4 predictor</p>
-
-<p>No pre-processing
+No pre-processing
 Resampling: Bootstrapped (25 reps) 
-Summary of sample sizes: 53940, 53940, 53940, 53940, 53940, 53940, ... 
-Resampling results</p>
+Summary of sample sizes: 
+53940,  53940, 53940, 53940, 53940, 53940, ... 
 
-<pre><code>    RMSE      Rsquared   RMSE SD   Rsquared SD
-    1156.655  0.9159408  10.27676  0.001223235
+Resampling results
+        RMSE      Rsquared   RMSE SD   Rsquared SD
+        1156.655  0.9159408  10.27676  0.001223235
 </code></pre>
 
   </article>

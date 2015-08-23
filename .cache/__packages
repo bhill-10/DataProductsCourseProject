@@ -3,3 +3,5 @@ slidify
 ggplot2
 lattice
 caret
+nlme
+mgcv

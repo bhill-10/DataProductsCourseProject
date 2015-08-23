@@ -31,17 +31,9 @@ Three of the variables are ordered factors:
 --- .class #id 
 
 ##### Exploratory Analysis
-
 Relationship of Price to Carat Weight: the relationship is roughly linear with larger sized diamonds (few in number) with weights above 3 carats showing as outliers from the main group of diamonds.  There are a total of 53,940 diamonds in the dataset.
 
 
-```r
-require(ggplot2)
-```
-
-```
-## Loading required package: ggplot2
-```
 
 ```r
 g <- ggplot(diamonds, aes( x = carat, y = price)) + geom_point()
@@ -67,24 +59,13 @@ title = "Diamond Price vs. Carat Weight") + facet_grid(clarity~color); print(g2)
 --- .class #id
 
 ##### Build Pricing Model
-
 A GLM model was fitted to the data and used to predict diamond values for user selected characteristics using a shiny application.      https://bhill-10.shinyapps.io/Data_Products_Course_Project
-
-
-```r
-library(caret)
-```
-
-```
-## Loading required package: lattice
-```
 
 ```r
 vars <- diamonds[,1:4]
 vars$price <- diamonds$price
 price_estimate <- train(price ~., data = vars, method = "glm")
 ```
-
 ```
 Generalized Linear Model:
 53940 samples

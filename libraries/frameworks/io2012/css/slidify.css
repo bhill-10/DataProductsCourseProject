@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Source+Code+Pro:500|Open+Sans|Oswald);
+﻿@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Source+Code+Pro:500|Open+Sans|Oswald);
 
 /* Styles for Table of Contents */
 #io2012-toc {
@@ -93,10 +93,10 @@ article q {
 
 q {
   display: block;
-  font-size: 40px;
-  line-height: 56px;
+  font-size: 36px;
+  line-height: 50px;
   margin-left: 50px;
-  margin-top: 100px;
+  margin-top: 75px;
   margin-right: 50px;
 }
 
@@ -159,8 +159,8 @@ table {
   border: none;
   width: 100%;
   border-collapse: collapse;
-  font-size: 20px;
-  line-height: 38px;
+  font-size: 18px;
+  line-height: 36px;
   font-family: 'Trebuchet MS';
   font-weight: bolder;
   color: rgb(102, 102, 102);
@@ -308,7 +308,7 @@ section.video {
 
 /* Smaller code fonts in modal popup */
 .modal pre code {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 img.center {
@@ -337,7 +337,7 @@ article p {
 }
 
 code {
-  font-size: 90%;
+  font-size: 85%;
   font-family: "Source Code Pro", monospace;
   color: darkred;
 }

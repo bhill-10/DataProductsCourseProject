@@ -93,10 +93,10 @@ article q {
 
 q {
   display: block;
-  font-size: 36px;
-  line-height: 50px;
+  font-size: 32px;
+  line-height: 40px;
   margin-left: 50px;
-  margin-top: 75px;
+  margin-top: 50px;
   margin-right: 50px;
 }
 
@@ -107,7 +107,7 @@ q::before {
   margin-left: -2.1em;
   width: 2em;
   text-align: right;
-  font-size: 90px;
+  font-size: 80px;
   color: silver;
 }
 
@@ -115,7 +115,7 @@ q::after {
   content: '”';
   position: absolute;
   margin-left: .1em;
-  font-size: 90px;
+  font-size: 80px;
   color: silver;
 }
 
@@ -144,7 +144,7 @@ q.shout:after {
 
 /* Tables */
 table caption{
-  margin-top: 20pt;
+  margin-top: 16pt;
   font-weight: normal;
   font-family: "Trebuchet MS", Garuda, sans-serif;
 }
@@ -160,7 +160,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-size: 18px;
-  line-height: 36px;
+  line-height: 32px;
   font-family: 'Trebuchet MS';
   font-weight: bolder;
   color: rgb(102, 102, 102);

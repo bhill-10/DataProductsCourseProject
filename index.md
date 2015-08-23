@@ -37,6 +37,13 @@ Relationship of Price to Carat Weight: the relationship is roughly linear with l
 
 ```r
 require(ggplot2)
+```
+
+```
+## Loading required package: ggplot2
+```
+
+```r
 g <- ggplot(diamonds, aes( x = carat, y = price)) + geom_point()
 g <- g + labs(x = "Carat Weight", y = "Diamond Price $USD", title = "Diamond Price vs. Carat Weight") 
 print(g)
@@ -66,6 +73,13 @@ A GLM model was fitted to the data and used to predict diamond values for user s
 
 ```r
 library(caret)
+```
+
+```
+## Loading required package: lattice
+```
+
+```r
 vars <- diamonds[,1:4]
 vars$price <- diamonds$price
 price_estimate <- train(price ~., data = vars, method = "glm")

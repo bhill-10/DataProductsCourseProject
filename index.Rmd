@@ -31,11 +31,13 @@ Three of the variables are ordered factors:
 --- .class #id 
 
 ##### Exploratory Analysis
-
 Relationship of Price to Carat Weight: the relationship is roughly linear with larger sized diamonds (few in number) with weights above 3 carats showing as outliers from the main group of diamonds.  There are a total of 53,940 diamonds in the dataset.
+```{r load_lib, echo = FALSE, results='hide'}
+library(ggplot2)
+library(caret)
+```
 
-```{r price_vs_carat, fig.height= 4, fig.align = "center"}
-require(ggplot2)
+```{r price_vs_carat, fig.height= 4, fig.align = "center", message=FALSE, warning=FALSE, cache = TRUE}
 g <- ggplot(diamonds, aes( x = carat, y = price)) + geom_point()
 g <- g + labs(x = "Carat Weight", y = "Diamond Price $USD", title = "Diamond Price vs. Carat Weight") 
 print(g)
@@ -45,7 +47,7 @@ print(g)
 
 ###### Adjust for Factored Items: Color, Clarity, and Cut
 However, if one adjusts for color and clarity, the next two most significant variables, the linear relationship is more pronounced. The points are colored by "cut" the least significant variable of the four.
-```{r price_carat_adjforcutandcolor, fig.height = 6, fig.width = 10, fig.align = 'center'}
+```{r price_carat_adjforcutandcolor, fig.height = 6, fig.width = 10, fig.align = 'center', message = FALSE}
 g2 <- ggplot(diamonds, aes( x = carat, y = price)) + geom_point(aes(color = cut)) +
 labs(x = "Carat Weight", y = "Diamond Price $USD", 
 title = "Diamond Price vs. Carat Weight") + facet_grid(clarity~color); print(g2)
@@ -54,16 +56,12 @@ title = "Diamond Price vs. Carat Weight") + facet_grid(clarity~color); print(g2)
 --- .class #id
 
 ##### Build Pricing Model
-
 A GLM model was fitted to the data and used to predict diamond values for user selected characteristics using a shiny application.      https://bhill-10.shinyapps.io/Data_Products_Course_Project
-
-```{r pricing_model, cache = TRUE}
-library(caret)
+```{r pricing_model, cache = TRUE, message = FALSE}
 vars <- diamonds[,1:4]
 vars$price <- diamonds$price
 price_estimate <- train(price ~., data = vars, method = "glm")
 ```
-
 ```
 Generalized Linear Model:
 53940 samples
